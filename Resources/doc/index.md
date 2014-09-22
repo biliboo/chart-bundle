@@ -36,5 +36,4 @@ Supported libraries
 Cookbooks
 =========
 
-- Create a library
-- Using useful statistic functions (Doctrine only)
+- [Create a library](library/create_a_library.md)
