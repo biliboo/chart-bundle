@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- Chart service -->
+        <parameter key="biliboo_chart.chart.factory.class">Biliboo\ChartBundle\Chart\ChartFactory</parameter>
+        
+        <!-- Resolvers -->
+        <parameter key="biliboo_chart.serie.resolver.class">Biliboo\ChartBundle\Serie\SerieResolver</parameter>
+        <parameter key="biliboo_chart.formatter.resolver.class">Biliboo\ChartBundle\Formatter\FormatterResolver</parameter>
+        <parameter key="biliboo_chart.renderer.resolver.class">Biliboo\ChartBundle\Renderer\RendererResolver</parameter>
+        
+        <!-- Series -->
+        <parameter key="biliboo_chart.serie.doctrine_query_builder.class">Biliboo\ChartBundle\Lib\Serie\DoctrineQueryBuilderSerie</parameter>
+        <parameter key="biliboo_chart.serie.doctrine_query.class">Biliboo\ChartBundle\Lib\Serie\DoctrineQuerySerie</parameter>
+        <parameter key="biliboo_chart.serie.doctrine.class">Biliboo\ChartBundle\Lib\Serie\DoctrineSerie</parameter>
+        
+        <!-- Formatters -->
+        <parameter key="biliboo_chart.formatter.translation.class">Biliboo\ChartBundle\Lib\Formatter\TranslationFormatter</parameter>
+        <parameter key="biliboo_chart.formatter.date_utc.class">Biliboo\ChartBundle\Lib\Formatter\DateUtcFormatter</parameter>
+        <parameter key="biliboo_chart.formatter.ms_timestamp.class">Biliboo\ChartBundle\Lib\Formatter\MsTimestampFormatter</parameter>
+        <parameter key="biliboo_chart.formatter.cumulative.class">Biliboo\ChartBundle\Lib\Formatter\CumulativeFormatter</parameter>
+
+        <!-- Twig extensions -->
+        <parameter key="biliboo_chart.twig.chart.class">Biliboo\ChartBundle\Twig\ChartExtension</parameter>
+    </parameters>
+
+    <services>
+        <!-- Chart service -->
+        <service id="biliboo_chart.chart.factory" class="%biliboo_chart.chart.factory.class%">
+            <argument type="service" id="biliboo_chart.serie.resolver" />
+            <argument type="service" id="biliboo_chart.formatter.resolver" />
+            <argument type="service" id="biliboo_chart.renderer.resolver" />
+        </service>
+        
+        <!-- Resolvers -->
+        <service id="biliboo_chart.serie.resolver" class="%biliboo_chart.serie.resolver.class%"></service>
+        <service id="biliboo_chart.formatter.resolver" class="%biliboo_chart.formatter.resolver.class%"></service>
+        <service id="biliboo_chart.renderer.resolver" class="%biliboo_chart.renderer.resolver.class%"></service>
+        
+        <!-- Series -->
+        <service id="biliboo_chart.serie.doctrine_query_builder" class="%biliboo_chart.serie.doctrine_query_builder.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="chart.serie" alias="doctrine_query_builder" />
+        </service>
+        <service id="biliboo_chart.serie.doctrine_query" class="%biliboo_chart.serie.doctrine_query.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="chart.serie" alias="doctrine_query" />
+        </service>
+        <service id="biliboo_chart.serie.doctrine" class="%biliboo_chart.serie.doctrine.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="chart.serie" alias="doctrine" />
+        </service>
+        
+        <!-- Formatters -->
+        <service id="biliboo_chart.formatter.translation" class="%biliboo_chart.formatter.translation.class%">
+            <argument type="service" id="translator" />
+            <tag name="chart.formatter" alias="translate" />
+        </service>
+        <service id="biliboo_chart.formatter.date_utc" class="%biliboo_chart.formatter.date_utc.class%">
+            <tag name="chart.formatter" alias="date_utc" />
+        </service>
+        <service id="biliboo_chart.formatter.ms_timestamp" class="%biliboo_chart.formatter.ms_timestamp.class%">
+            <tag name="chart.formatter" alias="ms_timestamp" />
+        </service>
+        <service id="biliboo_chart.formatter.cumulative" class="%biliboo_chart.formatter.cumulative.class%">
+            <tag name="chart.formatter" alias="cumulative" />
+        </service>
+
+        <!-- Twig Extensions -->
+        <service id="biliboo_chart.twig.chart" class="%biliboo_chart.twig.chart.class%">
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>

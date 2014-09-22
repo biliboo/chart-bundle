@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- Renderers -->
+        <parameter key="biliboo_chart.renderer.highchart.class">Biliboo\ChartBundle\Lib\Chart\Highchart\HighchartRenderer</parameter>
+    </parameters>
+
+    <services>
+        <!-- Renderers -->
+        <service id="biliboo_chart.renderer.highchart" class="%biliboo_chart.renderer.highchart.class%">
+            <argument type="service" id="templating" />
+            <tag name="chart.renderer" alias="highchart" />
+        </service>
+    </services>
+</container>

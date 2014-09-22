@@ -1,0 +1,28 @@
+{% import 'BilibooChartBundle:Renderer:utils.html.twig' as utils %}
+
+{% set options = chart.vars.options %}
+
+<div id="{{ options.container }}" {{ options.attr }}></div>
+
+<script language="javascript">
+    jQuery(function () {
+        jQuery(document).ready(function () {
+            jQuery('#{{ options.container }}').highcharts('StockChart', {
+                {{ utils.javascriptify(options, 'chart') }}
+                {{ utils.javascriptify(options, 'rangeSelector') }}
+                {{ utils.javascriptify(options, 'title') }}
+                {{ utils.javascriptify(options, 'legend') }}
+                {{ utils.javascriptify(options, 'credits') }}
+                series: [
+                {% for serie in chart.vars.series %}
+                    {
+                        {% if serie.type is not null %}type: '{{ serie.type }}',{% endif %}
+                        name: '{{ serie.name|trans }}',
+                        data: {{ decode_serie_data(serie.data) }}
+                    }{%- if not loop.last-%},{%- endif -%}
+                {% endfor %}
+                ]
+            });
+        });
+    });
+</script>

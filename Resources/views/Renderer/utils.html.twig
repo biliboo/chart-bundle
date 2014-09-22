@@ -1,0 +1,29 @@
+{%- macro javascriptify(properties, property) -%}
+    {%- if property is not defined or property is null -%}
+        {{ _self.javascriptify_helper(properties) }}
+    {%- else -%}
+        {%- if property in properties|keys -%}
+            {{ property }}: {
+                {{ _self.javascriptify_helper(properties[property]) }}
+            },
+        {%- endif -%}
+    {%- endif -%}
+{%- endmacro -%}
+
+{%- macro javascriptify_helper(properties) -%}
+    {%- for key,value in properties -%}
+        {%- if value is iterable -%}
+            {% if is_type(value, 'contains_array') %}
+            {% if not is_type(key, 'numeric') %}{{ key }}:{% endif %} [
+                {{ _self.javascriptify_helper(value) }}
+            ]{%- if not loop.last-%},{%- endif -%}
+            {% else %}
+            {% if not is_type(key, 'numeric') %}{{ key }}:{% endif %}{% if is_type(value, 'contains_array') %}[{% else %} { {% endif %}
+                {{ _self.javascriptify_helper(value) }}
+            {% if is_type(value, 'contains_array') %}]{% else %} } {% endif %}{%- if not loop.last-%},{%- endif -%}
+            {% endif %}
+        {%- else -%}
+            {{ key }}: {%- if value is not null -%}{% if is_type(value, 'numeric')%}{{ value}}{% else %}{% if is_type(value, 'boolean')%}{% if not value %}false{% else %}true{% endif %}{% else %}'{{ value|trans }}'{% endif %}{% endif %}{%- else -%}null{%- endif -%}{%- if not loop.last-%},{%- endif -%}{{ '\n' }}
+        {%- endif-%}
+    {%- endfor -%}
+{%- endmacro -%}
