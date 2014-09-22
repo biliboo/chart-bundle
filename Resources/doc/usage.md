@@ -1,15 +1,15 @@
 Basic usage
 ===========
 
-You will see that the ChartBundle philosophy is deeply inpsired from the Symfony Form component.
+You will see that the ChartBundle philosophie is deeply inspired from the Symfony Form component.
 
 ## Series
 
 As a chart is composed of at least one serie, you first need to create the serie(s). You can have multiple type of serie. Here we will create a Doctrine based serie.
 
-
-``` php
+```php
 <?php
+// src Acme\ChartBundle\Serie\RegistrationSerie.php
 
 use Acme\ChartBundle\Serie;
 use Biliboo\ChartBundle\Serie\Type\AbstractDoctrineQueryBuiderSerie;
@@ -30,7 +30,6 @@ class RegistrationSerie extends AbstractDoctrineQueryBuiderSerie
         return $qb;
     }
 }
-
 ```
 
 In the above example, we assume `date` is a timestamp of a month.
@@ -41,8 +40,9 @@ Most of the time, a series has to return an array of couple "date" - "numeric" i
 
 A chart contains the series and define the required chart library.
 
-``` php
+```php
 <?php
+// src Acme\ChartBundle\Chart\RegistrationChart.php
 
 use Acme\ChartBundle\Chart;
 use Acme\ChartBundle\Serie\RegistrationSerie;
@@ -66,6 +66,7 @@ You can render your chart from the controller or using `biliboo_chart.chart.fact
 
 ```php
 <?php
+// src Acme\ChartBundle\Controller\MyController.php
 
 use Acme\ChartBundle\Chart\RegistrationChart;
 use Acme\ChartBundle\Controller;

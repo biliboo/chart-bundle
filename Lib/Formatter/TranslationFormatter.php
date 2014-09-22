@@ -34,7 +34,9 @@ class TranslationFormatter extends AbstractFormatter
      */
     public function format(array $data, array $options, SerieInterface $serie)
     {
-        $data[0] = $this->translator->trans(/** @Ignore*/ $data[0]);
+        $prefix = (isset($options['prefix']) ? $options['prefix'] : '');
+
+        $data[0] = $this->translator->trans(/** @Ignore*/ $prefix . $data[0]);
 
         return $data;
     }

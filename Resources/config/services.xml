@@ -9,14 +9,14 @@
         <parameter key="biliboo_chart.chart.factory.class">Biliboo\ChartBundle\Chart\ChartFactory</parameter>
         
         <!-- Resolvers -->
-        <parameter key="biliboo_chart.serie.resolver.class">Biliboo\ChartBundle\Serie\SerieResolver</parameter>
+        <parameter key="biliboo_chart.series.resolver.class">Biliboo\ChartBundle\Serie\SerieResolver</parameter>
         <parameter key="biliboo_chart.formatter.resolver.class">Biliboo\ChartBundle\Formatter\FormatterResolver</parameter>
         <parameter key="biliboo_chart.renderer.resolver.class">Biliboo\ChartBundle\Renderer\RendererResolver</parameter>
         
         <!-- Series -->
-        <parameter key="biliboo_chart.serie.doctrine_query_builder.class">Biliboo\ChartBundle\Lib\Serie\DoctrineQueryBuilderSerie</parameter>
-        <parameter key="biliboo_chart.serie.doctrine_query.class">Biliboo\ChartBundle\Lib\Serie\DoctrineQuerySerie</parameter>
-        <parameter key="biliboo_chart.serie.doctrine.class">Biliboo\ChartBundle\Lib\Serie\DoctrineSerie</parameter>
+        <parameter key="biliboo_chart.series.doctrine_query_builder.class">Biliboo\ChartBundle\Lib\Serie\DoctrineQueryBuilderSerie</parameter>
+        <parameter key="biliboo_chart.series.doctrine_query.class">Biliboo\ChartBundle\Lib\Serie\DoctrineQuerySerie</parameter>
+        <parameter key="biliboo_chart.series.doctrine.class">Biliboo\ChartBundle\Lib\Serie\DoctrineSerie</parameter>
         
         <!-- Formatters -->
         <parameter key="biliboo_chart.formatter.translation.class">Biliboo\ChartBundle\Lib\Formatter\TranslationFormatter</parameter>
@@ -31,28 +31,28 @@
     <services>
         <!-- Chart service -->
         <service id="biliboo_chart.chart.factory" class="%biliboo_chart.chart.factory.class%">
-            <argument type="service" id="biliboo_chart.serie.resolver" />
+            <argument type="service" id="biliboo_chart.series.resolver" />
             <argument type="service" id="biliboo_chart.formatter.resolver" />
             <argument type="service" id="biliboo_chart.renderer.resolver" />
         </service>
         
         <!-- Resolvers -->
-        <service id="biliboo_chart.serie.resolver" class="%biliboo_chart.serie.resolver.class%"></service>
+        <service id="biliboo_chart.series.resolver" class="%biliboo_chart.series.resolver.class%"></service>
         <service id="biliboo_chart.formatter.resolver" class="%biliboo_chart.formatter.resolver.class%"></service>
         <service id="biliboo_chart.renderer.resolver" class="%biliboo_chart.renderer.resolver.class%"></service>
         
         <!-- Series -->
-        <service id="biliboo_chart.serie.doctrine_query_builder" class="%biliboo_chart.serie.doctrine_query_builder.class%">
+        <service id="biliboo_chart.series.doctrine_query_builder" class="%biliboo_chart.series.doctrine_query_builder.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <tag name="chart.serie" alias="doctrine_query_builder" />
+            <tag name="chart.series" alias="doctrine_query_builder" />
         </service>
-        <service id="biliboo_chart.serie.doctrine_query" class="%biliboo_chart.serie.doctrine_query.class%">
+        <service id="biliboo_chart.series.doctrine_query" class="%biliboo_chart.series.doctrine_query.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <tag name="chart.serie" alias="doctrine_query" />
+            <tag name="chart.series" alias="doctrine_query" />
         </service>
-        <service id="biliboo_chart.serie.doctrine" class="%biliboo_chart.serie.doctrine.class%">
+        <service id="biliboo_chart.series.doctrine" class="%biliboo_chart.series.doctrine.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <tag name="chart.serie" alias="doctrine" />
+            <tag name="chart.series" alias="doctrine" />
         </service>
         
         <!-- Formatters -->

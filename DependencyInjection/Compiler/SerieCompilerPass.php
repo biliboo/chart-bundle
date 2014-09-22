@@ -15,14 +15,14 @@ class SerieCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('biliboo_chart.serie.resolver')) {
+        if (!$container->hasDefinition('biliboo_chart.series.resolver')) {
             return;
         }
 
-        $definition = $container->getDefinition('biliboo_chart.serie.resolver');
+        $definition = $container->getDefinition('biliboo_chart.series.resolver');
 
         $taggedServices = $container->findTaggedServiceIds(
-            'chart.serie'
+            'chart.series'
         );
 
         foreach ($taggedServices as $id => $tagAttributes) {
