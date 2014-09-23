@@ -18,10 +18,10 @@ This bundle do not manage the JavaScript dependencies for you.
 ## Advanced usage
 
 - [Formatters](formatters/index.md)
-    - [Cumulative](formatters/cumulative.md)
-    - [DateUtc](formatters/date_utc.md)
-    - [MsTimestamp](formatters/ms_timestamp.md)
-    - [Translation](formatters/translation.md)
+    - [Cumulative](formatters/index.md#cumulative)
+    - [DateUtc](formatters/index.md#dateutc)
+    - [MsTimestamp](formatters/index.md#mstimestamp)
+    - [Translation](formatters/index.md#translation)
 - [Series](series/index.md)
     - [Doctrine Query](series/doctrine_query.md)
     - [Doctrine QueryBuilder](series/doctrine_query_builder.md)
