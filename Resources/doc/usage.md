@@ -79,7 +79,7 @@ class MyController extends Controller
     public function indexAction()
     {
         return $this->render('AcmeChartBundle:Registration:index.html.twig', [
-            'chart' => $this->createChart(new RegistrationChart())
+            'chart' => $this->createChart(new RegistrationChart())->createView()
         ]);
     }
 }

@@ -5,7 +5,7 @@
 <div id="{{ options.container }}" {{ options.attr }}></div>
 
 <script language="javascript">
-    jQuery(function () {
+    (function() {
         jQuery(document).ready(function () {
             jQuery('#{{ options.container }}').highcharts('StockChart', {
                 {{ utils.javascriptify(options, 'chart') }}
@@ -24,5 +24,5 @@
                 ]
             });
         });
-    });
+    })();
 </script>

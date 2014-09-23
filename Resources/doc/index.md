@@ -39,3 +39,4 @@ Cookbooks
 - Send data to a chart and its series
 - Inject services in a series
 - [Create a library](library/create_a_library.md)
+- Use JmsTranslationBundle

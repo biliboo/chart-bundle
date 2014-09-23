@@ -22,6 +22,29 @@ abstract class AbstractSerie implements AbstractSerieInterface
     }
 
     /**
+     * @param array $row
+     * @return array
+     */
+    protected function parseValues(array $row)
+    {
+        $data = [];
+
+        foreach(array_values($row) as $value) {
+            if (is_float($value)) {
+                $data[] = (float) $value;
+            } elseif (is_double($value)) {
+                $data[] = (double) $value;
+            } elseif (is_numeric($value)) {
+                $data[] = (int) $value;
+            } else {
+                $data[] = $value;
+            }
+        }
+
+        return $data;
+    }
+
+    /**
      * @param SerieView $view
      * @param SerieInterface $serie
      * @param array $options

@@ -25,7 +25,7 @@ abstract class AbstractDoctrineQueryBuiderSerie extends AbstractDoctrineSerie
         $data   = [];
 
         foreach($cursor as $row) {
-            $data[] = array_values($row);
+            $data[] = $this->parseValues($row);
         }
 
         return $data;
