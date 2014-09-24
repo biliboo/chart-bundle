@@ -62,7 +62,7 @@ class ChartFactory
         $options = $this->getChartOptions($chart, $data, $options);
 
         // Builde the series
-        $builder = new SerieBuilder($this->serieResolver, $this->formatterResolver);
+        $builder = new SerieBuilder($this->serieResolver, $this->formatterResolver, $data);
         $chart->buildSeries($builder, $options);
 
         // We create the chart

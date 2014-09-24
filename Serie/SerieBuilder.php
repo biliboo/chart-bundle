@@ -42,13 +42,16 @@ class SerieBuilder implements SerieBuilderInterface
     /**
      * @param SerieResolver $serieResolver
      * @param FormatterResolver $formatterResolver
+     * @param mixed $data
      */
     public function __construct(
         SerieResolver $serieResolver,
-        FormatterResolver $formatterResolver)
+        FormatterResolver $formatterResolver,
+        $data)
     {
         $this->serieResolver     = $serieResolver;
         $this->formatterResolver = $formatterResolver;
+        $this->data              = $data;
         $this->series            = [];
     }
 
@@ -68,6 +71,14 @@ class SerieBuilder implements SerieBuilderInterface
     public function all()
     {
         return $this->series;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 
     /**

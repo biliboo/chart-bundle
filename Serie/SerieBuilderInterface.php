@@ -25,4 +25,9 @@ interface SerieBuilderInterface
      * @return SerieBuilderInterface
      */
     public function add($serie, array $options = []);
+
+    /**
+     * @return mixed
+     */
+    public function getData();
 }
