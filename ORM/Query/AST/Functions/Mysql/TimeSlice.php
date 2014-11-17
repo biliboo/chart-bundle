@@ -44,9 +44,9 @@ class TimeSlice extends FunctionNode
         $value = $sqlWalker->walkArithmeticPrimary($this->arithmeticExpression);
 
         return sprintf(
-            'FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(%s)/%d) * %d)',
+            'FLOOR(UNIX_TIMESTAMP(%s)/%d)',
             $this->dateExpression->dispatch($sqlWalker),
-            $value, $value
+            $value
         );
     }
 }
