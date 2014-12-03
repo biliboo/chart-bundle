@@ -11,6 +11,7 @@
                 chart: {
                     {{ utils.javascriptify(options.chart) }}
                 },
+                {{ utils.javascriptify(options, 'legend') }}
                 {{ utils.javascriptify(options, 'title') }}
                 {{ utils.javascriptify(options, 'xAxis') }}
                 {{ utils.javascriptify(options, 'yAxis') }}
