@@ -23,7 +23,7 @@
             {% if is_type(value, 'contains_array') %}]{% else %} } {% endif %}{%- if not loop.last-%},{%- endif -%}
             {% endif %}
         {%- else -%}
-            {{ key }}: {%- if value is not null -%}{% if is_type(value, 'numeric')%}{{ value}}{% else %}{% if is_type(value, 'boolean')%}{% if not value %}false{% else %}true{% endif %}{% else %}'{{ value|trans }}'{% endif %}{% endif %}{%- else -%}null{%- endif -%}{%- if not loop.last-%},{%- endif -%}{{ '\n' }}
+            {{ key }}: {%- if value is not null -%}{% if is_type(value, 'numeric')%}{{ value}}{% else %}{% if is_type(value, 'boolean')%}{% if not value %}false{% else %}true{% endif %}{% else %}'{{ value|trans|raw }}'{% endif %}{% endif %}{%- else -%}null{%- endif -%}{%- if not loop.last-%},{%- endif -%}{{ '\n' }}
         {%- endif-%}
     {%- endfor -%}
 {%- endmacro -%}
