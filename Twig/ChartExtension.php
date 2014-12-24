@@ -18,7 +18,9 @@ class ChartExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('chart', array($this, 'chart')),
+            new \Twig_SimpleFunction('chart', array($this, 'chart'), array(
+                'is_safe' => array('html')
+            )),
             new \Twig_SimpleFunction('is_type', array($this, 'isTypeOf')),
             new \Twig_SimpleFunction('decode_serie_data', array($this, 'decodeSerieData')),
         );
