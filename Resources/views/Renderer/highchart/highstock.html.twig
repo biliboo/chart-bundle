@@ -2,6 +2,7 @@
 
 {% set options = chart.vars.options %}
 
+{% autoescape false %}
 <div id="{{ options.container }}" {{ options.attr }}></div>
 
 <script language="javascript">
@@ -26,3 +27,4 @@
         });
     })();
 </script>
+{% endautoescape %}
