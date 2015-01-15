@@ -22,7 +22,9 @@ class ChartExtension extends \Twig_Extension
                 'is_safe' => array('html')
             )),
             new \Twig_SimpleFunction('is_type', array($this, 'isTypeOf')),
-            new \Twig_SimpleFunction('decode_serie_data', array($this, 'decodeSerieData')),
+            new \Twig_SimpleFunction('decode_serie_data', array($this, 'decodeSerieData'), array(
+                'is_safe' => array('html')
+            )),
         );
     }
 
