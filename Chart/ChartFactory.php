@@ -8,6 +8,7 @@ use Biliboo\ChartBundle\Chart\Type\AbstractChartInterface;
 use Biliboo\ChartBundle\Formatter\FormatterResolver;
 use Biliboo\ChartBundle\Renderer\RendererResolver;
 use Symfony\Component\OptionsResolver\Options;
+use Biliboo\ChartBundle\Chart\ChartResolver;
 use Biliboo\ChartBundle\Serie\SerieBuilder;
 use Biliboo\ChartBundle\Chart\Chart;
 
@@ -18,6 +19,11 @@ use Biliboo\ChartBundle\Chart\Chart;
  */
 class ChartFactory
 {
+    /**
+     * @var ChartResolver
+     */
+    protected $chartResolver;
+
     /**
      * @var SerieResolver
      */
@@ -34,32 +40,43 @@ class ChartFactory
     protected $rendererResolver;
 
     /**
+     * @param ChartResolver $chartResolver
      * @param SerieResolver $serieResolver
      * @param FormatterResolver $formatterResolver
      * @param RendererResolver $rendererResolver
      */
     public function __construct(
+        ChartResolver $chartResolver,
         SerieResolver $serieResolver,
         FormatterResolver $formatterResolver,
         RendererResolver $rendererResolver)
     {
+        $this->chartResolver     = $chartResolver;
         $this->serieResolver     = $serieResolver;
         $this->formatterResolver = $formatterResolver;
         $this->rendererResolver  = $rendererResolver;
     }
 
     /**
-     * @param AbstractChartInterface $chart
+     * @param AbstractChartInterface|string $chart
      * @param mixed $data
-     * @param array $options
+     * @param array $attributes
      */
     public function createChart(
-        AbstractChartInterface $chart,
+        $chart,
         $data = null,
-        array $options = [])
+        array $attributes = [])
     {
+        if (is_string($chart)) {
+            $chart = $this->chartResolver->findByName($chart);
+        }
+
+        if (!$chart instanceof AbstractChartInterface) {
+            throw new \RuntimeException("Cannot create chart");
+        }
+
         // We get the options
-        $options = $this->getChartOptions($chart, $data, $options);
+        $options = $this->getChartOptions($chart, $data, $attributes);
 
         // Builde the series
         $builder = new SerieBuilder($this->serieResolver, $this->formatterResolver, $data);

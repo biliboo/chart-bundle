@@ -9,6 +9,7 @@
         <parameter key="biliboo_chart.chart.factory.class">Biliboo\ChartBundle\Chart\ChartFactory</parameter>
         
         <!-- Resolvers -->
+        <parameter key="biliboo_chart.charts.resolver.class">Biliboo\ChartBundle\Chart\ChartResolver</parameter>
         <parameter key="biliboo_chart.series.resolver.class">Biliboo\ChartBundle\Serie\SerieResolver</parameter>
         <parameter key="biliboo_chart.formatter.resolver.class">Biliboo\ChartBundle\Formatter\FormatterResolver</parameter>
         <parameter key="biliboo_chart.renderer.resolver.class">Biliboo\ChartBundle\Renderer\RendererResolver</parameter>
@@ -31,12 +32,14 @@
     <services>
         <!-- Chart service -->
         <service id="biliboo_chart.chart.factory" class="%biliboo_chart.chart.factory.class%">
+            <argument type="service" id="biliboo_chart.charts.resolver" />
             <argument type="service" id="biliboo_chart.series.resolver" />
             <argument type="service" id="biliboo_chart.formatter.resolver" />
             <argument type="service" id="biliboo_chart.renderer.resolver" />
         </service>
         
         <!-- Resolvers -->
+        <service id="biliboo_chart.charts.resolver" class="%biliboo_chart.charts.resolver.class%"></service>
         <service id="biliboo_chart.series.resolver" class="%biliboo_chart.series.resolver.class%"></service>
         <service id="biliboo_chart.formatter.resolver" class="%biliboo_chart.formatter.resolver.class%"></service>
         <service id="biliboo_chart.renderer.resolver" class="%biliboo_chart.renderer.resolver.class%"></service>
