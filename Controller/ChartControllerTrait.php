@@ -12,13 +12,13 @@ use Biliboo\ChartBundle\Chart\Type\AbstractChart;
 trait ChartControllerTrait
 {
     /**
-     * @param AbstractChart $chart
+     * @param AbstractChart|string $chart
      * @param mixed $data
      * @param array $options
      * @return \Biliboo\ChartBundle\Chart\ChartInterface
      */
     protected function createChart(
-        AbstractChart $chart,
+        $chart,
         $data = null,
         array $options = [])
     {
